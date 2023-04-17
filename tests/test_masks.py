@@ -43,6 +43,6 @@ def test_print_info_to_client():
         result = json.load(f)
     correct = f"26.08.2019 Перевод организации\n" \
               f"Maestro 1596 83** **** 5199 -> Счет **9589\n" \
-              f"31957.58 руб."
+              f"31957.58 руб.\n\n"
     # operations.print_info_to_client(result))
     assert operations.print_info_to_client(result) == correct
