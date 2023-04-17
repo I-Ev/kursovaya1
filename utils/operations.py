@@ -15,9 +15,7 @@ def get_valid_operations(file):
                     if operation['state'] == 'EXECUTED':
                         valid_oper_list.append(operation)
             return valid_oper_list
-        print("Файл пустой")
-        return None
-
+        return f"Файл пустой"
 
 def get_5_last_operations_info(data):
     '''возвращает список 5 последних операций
@@ -45,3 +43,6 @@ def print_info_to_client(data):
         except:
             print(f"{masks.get_masked_num(operation['to'])}")
         print(f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}\n")
+
+
+
