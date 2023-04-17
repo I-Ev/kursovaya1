@@ -8,12 +8,15 @@ def get_valid_operations(file):
     и у которых статус Проведен'''
     with open(file, encoding="UTF-8") as f:
         operations_list = json.load(f)
-        valid_oper_list = []
-        for operation in operations_list:
-            if operation:
-                if operation['state'] == 'EXECUTED':
-                    valid_oper_list.append(operation)
-    return valid_oper_list
+        if len(operations_list) > 0:
+            valid_oper_list = []
+            for operation in operations_list:
+                if operation:
+                    if operation['state'] == 'EXECUTED':
+                        valid_oper_list.append(operation)
+            return valid_oper_list
+        print("Файл пустой")
+        return None
 
 
 def get_5_last_operations_info(data):
@@ -42,5 +45,3 @@ def print_info_to_client(data):
         except:
             print(f"{masks.get_masked_num(operation['to'])}")
         print(f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}\n")
-
-
