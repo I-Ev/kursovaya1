@@ -33,16 +33,28 @@ def get_5_last_operations_info(data):
     return last_operations
 
 
+# def print_info_to_client(data):
+#     """Выводит операции в требуемом формате"""
+#     for operation in data:
+#         oper_date = datetime.strptime(operation['date'], '%Y-%m-%dT%H:%M:%S.%f')
+#         print(f"{oper_date.strftime('%d.%m.%Y')} {operation['description']}")
+#         try:
+#             print(f"{masks.get_masked_num(operation['from'])} -> {masks.get_masked_num(operation['to'])}")
+#         except:
+#             print(f"{masks.get_masked_num(operation['to'])}")
+#         print(f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}\n")
+
 def print_info_to_client(data):
     """Выводит операции в требуемом формате"""
+    result = ""
     for operation in data:
         oper_date = datetime.strptime(operation['date'], '%Y-%m-%dT%H:%M:%S.%f')
-        print(f"{oper_date.strftime('%d.%m.%Y')} {operation['description']}")
+        result += f"{oper_date.strftime('%d.%m.%Y')} {operation['description']}\n"
         try:
-            print(f"{masks.get_masked_num(operation['from'])} -> {masks.get_masked_num(operation['to'])}")
+            result += f"{masks.get_masked_num(operation['from'])} -> {masks.get_masked_num(operation['to'])}\n"
         except:
-            print(f"{masks.get_masked_num(operation['to'])}")
-        print(f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}\n")
-
+            result += f"{masks.get_masked_num(operation['to'])}\n"
+        result += f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}\n\n"
+    return result
 
 
